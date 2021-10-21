@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import { encryptStr } from './encryptStr';
+import { signHeaders } from './signHeaders';
 import { httpClient } from './httpClient';
 
 const { ACCESS_KEY, SECRET_KEY } = process.env as { [key: string]: string };
@@ -16,7 +16,7 @@ export async function getToken() {
         t: timestamp,
         sign_method: 'HMAC-SHA256',
         client_id: ACCESS_KEY,
-        sign: await encryptStr(signStr, SECRET_KEY),
+        sign: await signHeaders(signStr, SECRET_KEY),
     };
     try {
         const { data: login }: any = await httpClient.get(

@@ -1,6 +1,6 @@
 import * as qs from 'qs';
 import * as crypto from 'crypto';
-import { encryptStr } from './encryptStr';
+import { signHeaders } from './signHeaders';
 
 const { ACCESS_KEY, SECRET_KEY } = process.env as { [key: string]: string };
 
@@ -32,7 +32,7 @@ export async function getRequestSign(
         t,
         path: url,
         client_id: ACCESS_KEY,
-        sign: await encryptStr(signStr, SECRET_KEY),
+        sign: await signHeaders(signStr, SECRET_KEY),
         sign_method: 'HMAC-SHA256',
         access_token: token,
     };
