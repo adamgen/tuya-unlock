@@ -2,10 +2,7 @@ import * as qs from 'qs';
 import * as crypto from 'crypto';
 import { encryptStr } from './encryptStr';
 
-const {
-    ACCESS_KEY,
-    SECRET_KEY,
-} = process.env;
+const { ACCESS_KEY, SECRET_KEY } = process.env as { [key: string]: string };
 
 export async function getRequestSign(
     token: string,

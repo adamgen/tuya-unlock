@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 import { encryptStr } from './encryptStr';
 import { httpClient } from './httpClient';
 
-const { ACCESS_KEY, SECRET_KEY } = process.env;
+const { ACCESS_KEY, SECRET_KEY } = process.env as { [key: string]: string };
 
 export async function getToken() {
     const method = 'GET';

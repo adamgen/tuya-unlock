@@ -1,7 +1,7 @@
 import { tuyaRequest } from './tuyaRequest';
 import { decrypt, encrypt } from './utils';
 
-const { SECRET_KEY } = process.env;
+const { SECRET_KEY } = process.env as { [key: string]: string };
 
 const listUsers = async (deviceId: string) => {
     return await tuyaRequest({
