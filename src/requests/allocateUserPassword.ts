@@ -1,4 +1,4 @@
-import { tuyaRequest } from '../tuyaRequest';
+import { tuyaRequest } from '../utils/tuyaRequest';
 
 export const allocateUserPassword = (deviceId: string, userId: string) => {
     return tuyaRequest({

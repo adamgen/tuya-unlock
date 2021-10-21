@@ -1,4 +1,4 @@
-import { decrypt, encrypt } from './utils';
+import { decrypt, encrypt } from './utils/paswordCrypto';
 import { getPasswordTicket } from './requests/getPasswordTicket';
 import { addTempPassword } from './requests/addTempPassword';
 

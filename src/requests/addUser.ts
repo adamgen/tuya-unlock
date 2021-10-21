@@ -1,4 +1,4 @@
-import { tuyaRequest } from '../tuyaRequest';
+import { tuyaRequest } from '../utils/tuyaRequest';
 
 export const addUser = async (deviceId: string) => {
     return await tuyaRequest({
