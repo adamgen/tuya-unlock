@@ -1,7 +1,11 @@
 import * as qs from 'qs';
 import * as crypto from 'crypto';
 import { encryptStr } from './encryptStr';
-import { config } from './config';
+
+const {
+    ACCESS_KEY,
+    SECRET_KEY,
+} = process.env;
 
 export async function getRequestSign(
     token: string,
@@ -26,12 +30,12 @@ export async function getRequestSign(
         .update(JSON.stringify(body))
         .digest('hex');
     const stringToSign = [method, contentHash, '', url].join('\n');
-    const signStr = config.accessKey + token + t + stringToSign;
+    const signStr = ACCESS_KEY + token + t + stringToSign;
     return {
         t,
         path: url,
-        client_id: config.accessKey,
-        sign: await encryptStr(signStr, config.secretKey),
+        client_id: ACCESS_KEY,
+        sign: await encryptStr(signStr, SECRET_KEY),
         sign_method: 'HMAC-SHA256',
         access_token: token,
     };
