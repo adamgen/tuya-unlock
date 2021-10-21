@@ -43,16 +43,20 @@ const addTempPassword = async ({
     ticketId,
     name,
 }: AddTempPasswordProps) => {
-    const now = (new Date().getTime() / 1000).toString().split('.')[0];
+    const effective_time = parseInt(
+        (new Date().getTime() / 1000).toString().split('.')[0],
+    );
+    const invalid_time = effective_time + 60 * 60 * 24;
 
+    console.log({ effective_time, invalid_time });
     return tuyaRequest({
         url: `/v1.0/devices/${config.deviceId}/door-lock/temp-password`,
         method: 'POST',
         body: {
             name,
             password,
-            effective_time: now,
-            invalid_time: now + 60 * 60 * 24,
+            effective_time,
+            invalid_time,
             password_type: 'ticket',
             ticket_id: ticketId,
         },
@@ -94,7 +98,7 @@ export const run = async () => {
     );
     const encryptedPasswordAsHex = encryptedPassword.toString('hex');
     const data = await addTempPassword({
-        name: 'Adams api test 1',
+        name: 'Adams api test 2',
         password: encryptedPasswordAsHex,
         ticketId: ticketData.result.ticket_id,
     });
