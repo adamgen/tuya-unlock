@@ -1,7 +1,8 @@
 import * as crypto from 'crypto';
 import { encryptStr } from './encryptStr';
-import { config } from './config';
 import { httpClient } from './httpClient';
+
+const { ACCESS_KEY, SECRET_KEY } = process.env;
 
 export async function getToken() {
     const method = 'GET';
@@ -9,13 +10,13 @@ export async function getToken() {
     const signUrl = '/v1.0/token?grant_type=1';
     const contentHash = crypto.createHash('sha256').update('').digest('hex');
     const stringToSign = [method, contentHash, '', signUrl].join('\n');
-    const signStr = config.accessKey + timestamp + stringToSign;
+    const signStr = ACCESS_KEY + timestamp + stringToSign;
 
     const headers = {
         t: timestamp,
         sign_method: 'HMAC-SHA256',
-        client_id: config.accessKey,
-        sign: await encryptStr(signStr, config.secretKey),
+        client_id: ACCESS_KEY,
+        sign: await encryptStr(signStr, SECRET_KEY),
     };
     try {
         const { data: login }: any = await httpClient.get(
