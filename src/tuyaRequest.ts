@@ -1,5 +1,4 @@
 import { getToken } from './getToken';
-import { config } from './config';
 import { getRequestSign } from './getRequestSign';
 import { httpClient } from './httpClient';
 
@@ -9,6 +8,7 @@ interface TuyaRequestProps {
     params?: { [k: string]: any };
     body?: any;
 }
+
 export const tuyaRequest = async ({
     url,
     method,
